@@ -1,27 +1,19 @@
+import streamlit as st
+
+st.title("محاسبه قیمت")
+
 prices = []
+
 for i in range(3):
-    x = int(input("قیمت را وارد کنید"))
+    x = st.number_input(f"قیمت {i+1}", min_value=0, step=1)
     prices.append(x)
 
+if st.button("محاسبه"):
 
-bishtarin = prices[0]
-jam = 0
-kamtarin = prices[0]
+    bishtarin = max(prices)
+    kamtarin = min(prices)
+    miangin = sum(prices) / len(prices)
 
-
-for price in prices :
-    if kamtarin > price :
-        kamtarin = price
-    
-    if bishtarin < price:
-        bishtarin = price
-
-    jam += price 
-
-miangin = jam / len(prices)
-   
-
-print(prices)
-print(kamtarin,"کمترین")
-print(bishtarin,"بیشترین")
-print(miangin,"میانگین")
+    st.write("کمترین:", kamtarin)
+    st.write("بیشترین:", bishtarin)
+    st.write("میانگین:", miangin)
